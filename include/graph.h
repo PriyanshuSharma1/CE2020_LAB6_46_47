@@ -1,9 +1,16 @@
 #ifndef graph_h
 #define graph_h
+#include<vector>
 using namespace std;
 class Graph
 {
     public:
+    int vertex;
+    vector<int> *adjList;
+    Graph(int vertex)
+    {
+       
+    }
     bool isEmpty();
     bool isDirected();
     void addVertex(int newVertex);

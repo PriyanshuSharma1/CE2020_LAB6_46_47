@@ -16,5 +16,10 @@ bool Graph::isDirected()
 }
 void Graph::addVertex(int newVertex)
 {
-    
+
+}
+void Graph:: addEdge(int vertex1, int vertex2)
+{
+    adjList[vertex1].push_back(vertex2);
+    adjList[vertex2].push_back(vertex1);
 }

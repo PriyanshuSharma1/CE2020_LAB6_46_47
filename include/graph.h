@@ -2,6 +2,10 @@
 #define graph_h
 #include<vector>
 using namespace std;
+
+class Edge;
+class Vertex;
+
 class Graph
 {
     public:

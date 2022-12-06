@@ -254,9 +254,16 @@ void removeEdge(int fromVertex, int toVertex) {
   {
 
   }
-  void isEmpty()
+  bool isEmpty()
   {
-
+    if(vertices.size()==0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
   }
   void numEdge()
   {
@@ -428,6 +435,16 @@ int data1,data2,data;
       g.degree(data1);
 
       break;
+    case 13:
+        if(g.isEmpty()==true)
+        {
+            cout<<"The graph is empty"<<endl;
+
+        }
+        else
+        {
+            cout <<" The graph is not empty"<<endl;
+        }
 
     default:
       cout << "Enter Proper Option number " << endl;

@@ -55,10 +55,7 @@ class Vertex
         cout<<"Edge between "<<vertex<<" and "<<toVertex<<" added."<<endl;
 
     }
- void numEdges()
- {
-    cout<<"The number of Edges are: "<<edgeList.size()<<endl;
- }
+ 
 
   void printEdgeList() {
     cout << "[";
@@ -67,6 +64,14 @@ class Vertex
     }
     cout << "]";
     cout << endl;
+  }
+  int edges()
+  {
+    static int n=0;
+     for (auto it = edgeList.begin(); it != edgeList.end(); it++) {
+      n=n+1;
+    }
+    return n;
   }
   
     
@@ -217,7 +222,6 @@ void removeEdge(int fromVertex, int toVertex) {
           for (auto it = vertices.at(i).edgeList.begin(); it != vertices.at(i).edgeList.end(); it++) {
             if (it -> getendVertex() == toVertex) {
               vertices.at(i).edgeList.erase(it);
-              //cout<<"First erase"<<endl;
               break;
             }
           }
@@ -228,7 +232,6 @@ void removeEdge(int fromVertex, int toVertex) {
           for (auto it = vertices.at(i).edgeList.begin(); it != vertices.at(i).edgeList.end(); it++) {
             if (it -> getendVertex() == fromVertex) {
               vertices.at(i).edgeList.erase(it);
-              //cout<<"second erase"<<endl;
               break;
             }
           }
@@ -242,17 +245,18 @@ void removeEdge(int fromVertex, int toVertex) {
   {
    cout<<"The number of Vertices are: "<<vertices.size()<<endl;
   }
-  void inDegree(int v)
+  int inDegree(Vertex v)
   {
+    
+  }
+  int outDegree(Vertex v)
+  {
+    
 
   }
-  void outDegree(int v)
+  int degree(Vertex v)
   {
-
-  }
-  void degree(int v)
-  {
-
+    
   }
   bool isEmpty()
   {
@@ -265,18 +269,21 @@ void removeEdge(int fromVertex, int toVertex) {
         return false;
     }
   }
-  void numEdge()
+  int numEdge()
   {
 
+    static int num_edges=0;
+    for (int i = 0; i < vertices.size(); i++)
+    {
+           int num= vertices.at(i).edgeList.size();
+           num_edges=num_edges+num;
+
+           
+
+    }
+    return num_edges;
+    
   }
-
-
- 
-
-  
-    
-    
-
 };
 int main()
 {
@@ -285,29 +292,9 @@ int main()
     bool check;
     Vertex v1;
     int option;
-    // v1.setVertex(2);
-    // g.addVertex(2);
-    //     v1.setVertex(4);
-
-    // g.addVertex(4);
-    //     v1.setVertex(5);
-    // g.addVertex(6);
-    // v1.setVertex(6);
-    // g.addVertex(5);
-    // v1.setVertex(2);
-    // g.addVertex(2);
-    // g.printGraph();
-    // g.addEdge(4,5);
-    // g.addEdge(2,4);
-    // g.addEdge(6,5);
-    // g.printGraph();
-
-    // g.removeEdge(6,5);
-    // g.removeVertex(6);
-    // g.printGraph();
-    // g.Neighbors(4);
+  
   do{
-      cout<<"__Choose among list of opeartions__ "<<endl;
+      cout<<"_______________ MENU _________________ "<<endl<<endl;
       cout<< "Select Options-- Enter 0 to exit."<<endl;
       cout << "1. Add Vertex" << endl;
       cout << "2. Remove Vertex" << endl;
@@ -402,7 +389,7 @@ int data1,data2,data;
     case 8:
      
       cout << "Number of edges in graph : "<<endl;
-      g.numEdge();
+       cout<<"The number of edges in the graph is "<<g.numEdge()<<endl;
 
       break;
       case 9:
@@ -416,6 +403,8 @@ int data1,data2,data;
       cout << "Enter Vertex whose indegree is needed: ";
       cin >> data1;
       g.inDegree(data1);
+      cout<<"The number of in degree of the given vertex is: "<<g.inDegree(data1);
+
 
       break;
 
@@ -424,7 +413,7 @@ int data1,data2,data;
       cout << "Outdegree of vertices in graph : "<< endl;
       cout << "Enter Vertex whose outdegree is needed: ";
       cin >> data1;
-      g.outDegree(data1);
+      cout<<"The number of out degree of the given vertex is: "<<g.outDegree(data1);
 
       break;
     case 12:
@@ -432,7 +421,9 @@ int data1,data2,data;
       cout << "Degree of vertices in graph : "<< endl;
       cout << "Enter Vertex whose degree is needed: ";
       cin >> data1;
-      g.degree(data1);
+            cout<<"The number of  degree of the given vertex is: "<<g.degree(data1);
+
+    
 
       break;
     case 13:
@@ -446,8 +437,7 @@ int data1,data2,data;
             cout <<" The graph is not empty"<<endl;
         }
 
-    default:
-      cout << "Enter Proper Option number " << endl;
+  
     }
     cout << endl;
 

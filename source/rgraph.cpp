@@ -65,7 +65,7 @@ class Vertex
   void printEdgeList() {
     cout << "[";
     for (auto it = edgeList.begin(); it != edgeList.end(); it++) {
-      cout << it -> getendVertex() << " --> ";
+      cout << it -> getendVertex() << " , ";
     }
     cout << "]";
     cout << endl;
@@ -109,7 +109,8 @@ class Graph
         {
             Vertex temp;
             temp=vertices.at(i);
-            cout<<temp.getVertex()<<endl;
+            cout<<temp.getVertex()<<"---->";
+            temp.printEdgeList();
             
         }
         
@@ -237,7 +238,8 @@ int main()
     g.printGraph();
     g.addEdge(4,5);
     g.addEdge(2,4);
-    v1.printEdgeList();
+        g.printGraph();
+
     
 
 }

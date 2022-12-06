@@ -189,7 +189,7 @@ class Graph
        
     }
 
-  void deleteVertex(int v) {
+  void removeVertex(int v) {
     int vIndex = 0;
     for (int i = 0; i < vertices.size(); i++) {
       if (vertices.at(i).getVertex() == v) {
@@ -209,7 +209,7 @@ class Graph
     cout << "Vertex Deleted Successfully" << endl;
   }
  
-void deleteEdge(int fromVertex, int toVertex) {
+void removeEdge(int fromVertex, int toVertex) {
     bool check = edgeExists(fromVertex, toVertex);
     if (check == true) {
       for (int i = 0; i < vertices.size(); i++) {
@@ -242,9 +242,25 @@ void deleteEdge(int fromVertex, int toVertex) {
   {
    cout<<"The number of Vertices are: "<<vertices.size()<<endl;
   }
-  void degree()
+  void inDegree(int v)
   {
-    
+
+  }
+  void outDegree(int v)
+  {
+
+  }
+  void degree(int v)
+  {
+
+  }
+  void isEmpty()
+  {
+
+  }
+  void numEdge()
+  {
+
   }
 
 
@@ -261,33 +277,166 @@ int main()
     Graph g;
     bool check;
     Vertex v1;
-    v1.setVertex(2);
-    g.addVertex(2);
-        v1.setVertex(4);
+    int option;
+    // v1.setVertex(2);
+    // g.addVertex(2);
+    //     v1.setVertex(4);
 
-    g.addVertex(4);
-        v1.setVertex(5);
-    g.addVertex(6);
-    v1.setVertex(6);
-    g.addVertex(5);
-    v1.setVertex(2);
-    g.addVertex(2);
-    g.printGraph();
-    g.addEdge(4,5);
-    g.addEdge(2,4);
-    g.addEdge(6,5);
-    g.printGraph();
+    // g.addVertex(4);
+    //     v1.setVertex(5);
+    // g.addVertex(6);
+    // v1.setVertex(6);
+    // g.addVertex(5);
+    // v1.setVertex(2);
+    // g.addVertex(2);
+    // g.printGraph();
+    // g.addEdge(4,5);
+    // g.addEdge(2,4);
+    // g.addEdge(6,5);
+    // g.printGraph();
 
-    g.deleteEdge(6,5);
-    g.deleteVertex(6);
-    g.printGraph();
-    g.Neighbors(4);
-    g.numVertices();
-    v1.numEdges();
-    
-    
-    
+    // g.removeEdge(6,5);
+    // g.removeVertex(6);
+    // g.printGraph();
+    // g.Neighbors(4);
+  do{
+      cout<<"__Choose among list of opeartions__ "<<endl;
+      cout<< "Select Options-- Enter 0 to exit."<<endl;
+      cout << "1. Add Vertex" << endl;
+      cout << "2. Remove Vertex" << endl;
+      cout << "3. Add Edge" << endl;
+      cout << "4. Remove Edge" << endl;
+      cout << "5. Check if 2 Vertices are Neigbors" << endl;
+      cout << "6. Print All Neigbors of a Vertex" << endl;
+      cout << "7. Count the number of vertices " << endl;
+      cout << "8. Count the number of Edges " << endl;
+      cout << "9. Print Graph" << endl;
+      cout << "10. Print Indegree of a Vertex" << endl;
+      cout << "11. Print Outdegree of a Vertex" << endl;
+      cout << "12. Print Degree of a Vertex" << endl;
+      cout << "13. Check empty or not" << endl;
 
-    
+      cin>> option; 
 
+Vertex v1;
+int data1,data2,data;
+
+    switch (option) {
+    case 0:
+
+      break;
+
+    case 1:
+     
+      cout << "Add Vertex Operation -" << endl;
+      cout << "Enter Vertex :";
+      cin >> data1;
+      v1.setVertex(data1);
+      g.addVertex(v1);
+
+      break;
+
+    case 2:
+      cout << "Remove Vertex Operation -" << endl;
+      cout << "Enter Vertex to Delete : ";
+      cin >> data1;
+      g.removeVertex(data1);
+
+      break;
+
+    case 3:
+      cout << "Add Edge Operation -" << endl;
+      cout << "Enter Source Vertex: ";
+      cin >> data1;
+      cout << "Enter End Vertex: ";
+      cin >> data2;
+      g.addEdge(data1, data2);
+
+      break;
+
+    case 4:
+      cout << "Delete Edge Operation -" << endl;
+      cout << "Enter Source Vertex: ";
+      cin >> data1;
+      cout << "Enter End Vertex: ";
+      cin >> data2;
+      g.removeEdge(data1, data2);
+
+      break;
+
+    case 5:
+      cout << "Check if 2 Vertices are Neigbors -" << endl;
+      cout << "Enter Source Vertex: ";
+      cin >> data1;
+      cout << "Enter End Vertex: ";
+      cin >> data2;
+      check = g.edgeExists(data1, data2);
+      if (check == true) {
+        cout << "Vertices are Neigbors (Edge exist)";
+      } else {
+        cout << "Vertices are NOT Neigbors (Edge does NOT exist)";
+      }
+
+      break;
+
+    case 6:
+      cout << "Print All Neigbors of a Vertex -" << endl;
+      cout << "Enter Vertex to fetch all Neigbors : ";
+      cin >> data;
+      g.Neighbors(data1);
+
+      break;
+    case 7:
+     
+      cout << "Number of vertices in graph : "<<endl;
+      g.numVertices();
+
+      break;
+    case 8:
+     
+      cout << "Number of edges in graph : "<<endl;
+      g.numEdge();
+
+      break;
+      case 9:
+      cout << "Print Graph Operation -" << endl;
+      g.printGraph();
+
+      break;
+    case 10:
+     
+      cout << "Indegree of vertices in graph : "<< endl;
+      cout << "Enter Vertex whose indegree is needed: ";
+      cin >> data1;
+      g.inDegree(data1);
+
+      break;
+
+    case 11:
+     
+      cout << "Outdegree of vertices in graph : "<< endl;
+      cout << "Enter Vertex whose outdegree is needed: ";
+      cin >> data1;
+      g.outDegree(data1);
+
+      break;
+    case 12:
+     
+      cout << "Degree of vertices in graph : "<< endl;
+      cout << "Enter Vertex whose degree is needed: ";
+      cin >> data1;
+      g.degree(data1);
+
+      break;
+
+    default:
+      cout << "Enter Proper Option number " << endl;
+    }
+    cout << endl;
+
+  } while (option != 0);
+
+  return 0;
 }
+
+    

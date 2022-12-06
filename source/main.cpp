@@ -1,150 +1,152 @@
-#include<iostream>
+#include <iostream>
+#include "graph.h"
 using namespace std;
-class Graph
+int main()
 {
-    public:
-   virtual bool isEmpty()=0;
-   virtual bool isDirected()=0;
-    virtual void addVertex(string newVertex)=0;
-    virtual void addEdge(string originv,string destinVertex)=0;
-    virtual  void removeVertex(string vertexToRemove)=0;
-    void removeEdge(int vertex1, int vertex2);
-    int numVertices();
-    int numEdges();
-    int indegree(int vertex);
-    int outdegree(int vertex);
-    int degree(int vertex);
-    int neighbours(int vertex);
-    int neighbours(int vertex1, int vertex2);
-};
-class EdgeNode{
-     public:
-     EdgeNode*next;
-     string info;
-     EdgeNode(){
-        info="";
-         next=NULL;
-     }
-     EdgeNode(string destinv){
-        info = destinv;
-        next= NULL;
-     }
 
-};
-class Verticeslist:public Graph{
-    public:
-    EdgeNode*head;
-    EdgeNode*tail;
-    string info;
-    Verticeslist(){
-        info="";
-        head=NULL;
-        tail=NULL;
-    }
-      Verticeslist(string originv){
-        info=originv;
-        head=NULL;
-        tail=NULL;
-    }
-    bool isEmpty();
-    bool isDirected();
-    void addVertex(string newVertex);
-    void addEdge(string originv,string destinVertex);
-    void removeVertex(string vertexToRemove);
+    Graph g;
+    bool check;
+    Vertex v1;
+    int option;
 
-};
-bool Verticeslist :: isEmpty(){
-    if(head==NULL && tail == NULL){
-        return true;
-    }
-    else 
-     return false;
-}
-bool Verticeslist:: isDirected(){
-  return true;
-}
-void Verticeslist :: addVertex(string newvertex){
-    EdgeNode*newNode= new EdgeNode();
-    newNode->info = newvertex;
-        if (isEmpty())
+    do
     {
-        head = newNode;
-        tail = newNode;
-        cout << "First vertices added " << newvertex << endl;
-    }
-    else
-    {
-        newNode->next = head;
-        head = newNode;
-        cout << "Next vertices added " << newvertex << endl;
-    }
-}
-void Verticeslist :: addEdge(string originv,string destinVertex){
-    
-    EdgeNode*newNode= new EdgeNode();
-    newNode->info = destinVertex;
-    newNode-> next = NULL;
-  
-    EdgeNode *p = head;
-    if (isEmpty())
-    {
-        cout << "No nodes in th  graph" << endl;
-    }
-    while (p != NULL)
-    {
-        if (p->info == originv ){
-            if (p->next== NULL){
-            p->next = newNode;
-            tail = newNode;
-            cout << "Added destin vertex to the origin vertex and the edge is between  " << originv<<"," <<destinVertex<< endl;
-          
-             break;
+        cout << "__Choose among list of opeartions__ " << endl;
+        cout << "Select Options-- Enter 0 to exit." << endl;
+        cout << "1. Add Vertex" << endl;
+        cout << "2. Remove Vertex" << endl;
+        cout << "3. Add Edge" << endl;
+        cout << "4. Remove Edge" << endl;
+        cout << "5. Check if 2 Vertices are Neigbors" << endl;
+        cout << "6. Print All Neigbors of a Vertex" << endl;
+        cout << "7. Count the number of vertices " << endl;
+        cout << "8. Count the number of Edges " << endl;
+        cout << "9. Print Graph" << endl;
+        cout << "10. Print Indegree of a Vertex" << endl;
+        cout << "11. Print Outdegree of a Vertex" << endl;
+        cout << "12. Print Degree of a Vertex" << endl;
+        cout << "13. Check empty or not" << endl;
+
+        cin >> option;
+
+        Vertex v1;
+        int data1, data2, data;
+
+        switch (option)
+        {
+        case 0:
+
+            break;
+
+        case 1:
+
+            cout << "Add Vertex Operation -" << endl;
+            cout << "Enter Vertex :";
+            cin >> data1;
+            v1.setVertex(data1);
+            g.addVertex(v1);
+
+            break;
+
+        case 2:
+            cout << "Remove Vertex Operation -" << endl;
+            cout << "Enter Vertex to Delete : ";
+            cin >> data1;
+            g.removeVertex(data1);
+
+            break;
+
+        case 3:
+            cout << "Add Edge Operation -" << endl;
+            cout << "Enter Source Vertex: ";
+            cin >> data1;
+            cout << "Enter End Vertex: ";
+            cin >> data2;
+            g.addEdge(data1, data2);
+
+            break;
+
+        case 4:
+            cout << "Delete Edge Operation -" << endl;
+            cout << "Enter Source Vertex: ";
+            cin >> data1;
+            cout << "Enter End Vertex: ";
+            cin >> data2;
+            g.removeEdge(data1, data2);
+
+            break;
+
+        case 5:
+            cout << "Check if 2 Vertices are Neigbors -" << endl;
+            cout << "Enter Source Vertex: ";
+            cin >> data1;
+            cout << "Enter End Vertex: ";
+            cin >> data2;
+            check = g.edgeExists(data1, data2);
+            if (check == true)
+            {
+                cout << "Vertices are Neigbors (Edge exist)";
             }
-            else{ 
-            p->next =p->next->next;
+            else
+            {
+                cout << "Vertices are NOT Neigbors (Edge does NOT exist)";
             }
+
+            break;
+
+        case 6:
+            cout << "Print All Neigbors of a Vertex -" << endl;
+            cout << "Enter Vertex to fetch all Neigbors : ";
+            cin >> data;
+            g.Neighbors(data1);
+
+            break;
+        case 7:
+
+            cout << "Number of vertices in graph : " << endl;
+            g.numVertices();
+
+            break;
+        case 8:
+
+            cout << "Number of edges in graph : " << endl;
+            g.numEdge();
+
+            break;
+        case 9:
+            cout << "Print Graph Operation -" << endl;
+            g.printGraph();
+
+            break;
+        case 10:
+
+            cout << "Indegree of vertices in graph : " << endl;
+            cout << "Enter Vertex whose indegree is needed: ";
+            cin >> data1;
+          cout<<"The graph is Undirected so there is no indegree"<<endl;
+
+            break;
+
+        case 11:
+
+            cout << "Outdegree of vertices in graph : " << endl;
+            cout << "Enter Vertex whose outdegree is needed: ";
+            cin >> data1;
+            cout<<"The graph is Undirected so there is no indegree"<<endl;
+
+           
+
+            break;
+        case 12:
+
+            cout << "Degree of vertices in graph : " << endl;
+            g.degree();
+
+            break;
         }
-        else{
+        cout << endl;
 
-        p = p->next;
+    } while (option != 0);
 
-        }
-    }
-}
-
- void Verticeslist::removeVertex(string vertexToRemove)
- {
-
-}
- 
-
-
-
-
-
-
-
-
-int main(){
-    Graph *vl = new Verticeslist();
-    if(vl->isEmpty()){
-        cout<<"NULL GRAPH"<<endl;
-    }
-    else{
-         cout<<"Graph is not empty"<<endl;
-    };
-    vl->addVertex("Pokhara");
-    vl->addVertex("Syangja");
-    if(vl->isEmpty()){
-        cout<<"NULL GRAPH"<<endl;
-    }
-    else{
-         cout<<"Graph is not empty"<<endl;
-    };
-    vl->addEdge("Pokhara","Syangja");
-    vl->addEdge("Pokhara","Parbat");
-    vl->addEdge("Syangja","Parbat");
-    vl->addEdge("Syangja","Pokhara");
-    // vl-> removeVertex("Syangja");
-    
+    return 0;
 }

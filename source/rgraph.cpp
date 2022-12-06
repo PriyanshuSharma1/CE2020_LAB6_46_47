@@ -55,6 +55,21 @@ class Vertex
         cout<<"Edge between "<<vertex<<" and "<<toVertex<<" added."<<endl;
 
     }
+    //  void addEdgeToEdgelist(int toVertexID, int weight)
+  //  {
+  //	  	Edge e(toVertexID,weight);
+  //		edgeList.push_back(e); 
+  //		cout<<"Edge between "<<state_id<<" and "<<toVertexID<<" added Successfully"<<endl; 	
+  //  }
+
+  void printEdgeList() {
+    cout << "[";
+    for (auto it = edgeList.begin(); it != edgeList.end(); it++) {
+      cout << it -> getendVertex() << " --> ";
+    }
+    cout << "]";
+    cout << endl;
+  }
   
     
 };
@@ -87,6 +102,7 @@ class Graph
             cout<<"New Vertex Added successfully"<<endl;
         }
     }
+    
     void printGraph()
     {
         for (int i = 0; i < vertices.size(); i++)
@@ -98,15 +114,43 @@ class Graph
         }
         
     }
+    Vertex get_Vertex(int vid) {
+    Vertex temp;
+    for (int i = 0; i < vertices.size(); i++) {
+      temp = vertices.at(i);
+      if (temp.getVertex() == vid) {
+        return temp;
+      }
+    }
+    return temp;
+  }
+    bool edgeExists(int fromVertex, int toVertex) {
+    Vertex v = get_Vertex(fromVertex);
+    list < Edge > e;
+    e = v.getEdgelist();
+    bool flag = false;
+    for (auto it = e.begin(); it != e.end(); it++) {
+      if (it -> getendVertex() == toVertex) {
+        flag = true;
+        return flag;
+        break;
+      }
+
+    }
+    return flag;
+  }
       void addEdge(int fromVertex, int toVertex)
     {
         bool check1= exists(fromVertex);
         bool check2= exists(toVertex);
+        bool check3= edgeExists(fromVertex,toVertex);
         if((check1 && check2)==true)
         {
-            cout<<"Edge already exists"<<endl;
-        }
-        else
+            if(check3==true)
+            {
+                cout<<"Edge already exists"<<endl;
+            }
+             else
         {
             for (int i = 0; i < vertices.size(); i++)
             {
@@ -123,11 +167,53 @@ class Graph
                
             }
              cout<<"Edge between "<<fromVertex<<" and "<<toVertex<<" added successfully"<<endl;
+        }            
         }
-
+        else
+        {
+            cout<<"Invalid Vertex"<<endl;
+        }
+       
     }
-   
-  
+   void updateVertex(int oldVID, string vname) {
+    bool check = exists(oldVID);
+    if (check == true) {
+      for (int i = 0; i < vertices.size(); i++) {
+        if (vertices.at(i).getVertex() == oldVID) {
+          break;
+        }
+      }
+      cout << "Vertex(State) Updated Successfully " << endl;
+    }
+  }
+  void updateEdgeByID(int fromVertex, int toVertex, int newWeight) {
+    bool check = edgeExists(fromVertex, toVertex);
+    if (check == true) {
+      for (int i = 0; i < vertices.size(); i++) {
+
+        if (vertices.at(i).getVertex() == fromVertex) {
+          for (auto it = vertices.at(i).edgeList.begin(); it != vertices.at(i).edgeList.end(); it++) {
+            if (it -> getendVertex() == toVertex) {
+              break;
+            }
+
+          }
+
+        } else if (vertices.at(i).getVertex() == toVertex) {
+          for (auto it = vertices.at(i).edgeList.begin(); it != vertices.at(i).edgeList.end(); it++) {
+            if (it -> getendVertex() == fromVertex) {
+            
+              break;
+            }
+
+          }
+        }
+      }
+      cout << "Edge Weight Updated Successfully " << endl;
+    } else {
+      cout << "Edge between " <<fromVertex<<" to " <<toVertex << " DOES NOT Exist" << endl;
+    }
+  }
     
     
 
@@ -151,7 +237,7 @@ int main()
     g.printGraph();
     g.addEdge(4,5);
     g.addEdge(2,4);
-    g.printGraph();
+    v1.printEdgeList();
     
 
 }

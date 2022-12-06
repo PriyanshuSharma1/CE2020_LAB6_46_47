@@ -109,7 +109,7 @@ class Graph
         {
             Vertex temp;
             temp=vertices.at(i);
-            cout<<temp.getVertex()<<"---->";
+            cout<<temp.getVertex()<<"-->";
             temp.printEdgeList();
             
         }
@@ -126,12 +126,12 @@ class Graph
     return temp;
   }
   void getAllNeigborsByID(int vid) {
-    cout << get_Vertex(vid).getVertex() << "--> ";
+    cout << get_Vertex(vid).getVertex() <<  "Neighbours: ";
     for (int i = 0; i < vertices.size(); i++) {
       if (vertices.at(i).getVertex() == vid) {
-        cout << "[";
+        cout << " [";
         for (auto it = vertices.at(i).edgeList.begin(); it != vertices.at(i).edgeList.end(); it++) {
-          cout << it -> getendVertex() <<"--> ";
+          cout << it -> getendVertex() <<", ";
         }
         cout << "]";
 
@@ -198,7 +198,7 @@ class Graph
           break;
         }
       }
-      cout << "Vertex(State) Updated Successfully " << endl;
+      cout << "Vertex Updated Successfully " << endl;
     }
   }
   void deleteVertex(int vid) {
@@ -249,34 +249,44 @@ void deleteEdge(int fromVertex, int toVertex) {
       cout << "Edge Between " << fromVertex << " and " << toVertex << " Deleted Successfully." << endl;
     }
   }
-  void updateEdge(int fromVertex, int toVertex, int newWeight) {
-    bool check = edgeExists(fromVertex, toVertex);
-    if (check == true) {
-      for (int i = 0; i < vertices.size(); i++) {
+//   void updateEdge(int fromVertex, int toVertex, int newWeight) {
+//     bool check = edgeExists(fromVertex, toVertex);
+//     if (check == true) {
+//       for (int i = 0; i < vertices.size(); i++) {
 
-        if (vertices.at(i).getVertex() == fromVertex) {
-          for (auto it = vertices.at(i).edgeList.begin(); it != vertices.at(i).edgeList.end(); it++) {
-            if (it -> getendVertex() == toVertex) {
-              break;
-            }
+//         if (vertices.at(i).getVertex() == fromVertex) {
+//           for (auto it = vertices.at(i).edgeList.begin(); it != vertices.at(i).edgeList.end(); it++) {
+//             if (it -> getendVertex() == toVertex) {
+//               break;
+//             }
 
-          }
+//           }
 
-        } else if (vertices.at(i).getVertex() == toVertex) {
-          for (auto it = vertices.at(i).edgeList.begin(); it != vertices.at(i).edgeList.end(); it++) {
-            if (it -> getendVertex() == fromVertex) {
+//         } else if (vertices.at(i).getVertex() == toVertex) {
+//           for (auto it = vertices.at(i).edgeList.begin(); it != vertices.at(i).edgeList.end(); it++) {
+//             if (it -> getendVertex() == fromVertex) {
             
-              break;
-            }
+//               break;
+//             }
 
-          }
-        }
-      }
-      cout << "Edge Weight Updated Successfully " << endl;
-    } else {
-      cout << "Edge between " <<fromVertex<<" to " <<toVertex << " DOES NOT Exist" << endl;
-    }
+//           }
+//         }
+//       }
+//       cout << "Edge Weight Updated Successfully " << endl;
+//     } else {
+//       cout << "Edge between " <<fromVertex<<" to " <<toVertex << " DOES NOT Exist" << endl;
+//     }
+//   }
+  void numVertices()
+  {
+   cout<<"The number of Vertices are: "<<vertices.size()<<endl;
   }
+  void numEdges()
+  {
+  }
+ 
+
+  
     
     
 
@@ -302,10 +312,12 @@ int main()
     g.addEdge(4,5);
     g.addEdge(2,4);
     g.addEdge(6,5);
-        g.printGraph();
+    g.printGraph();
+
+    g.deleteEdge(6,5);
         g.deleteVertex(6);
-        g.deleteEdge(6,5);
-        g.printGraph();
+    g.printGraph();
+    g.getAllNeigborsByID(4);
 
     
 
